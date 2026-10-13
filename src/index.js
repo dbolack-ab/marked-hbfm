@@ -10,6 +10,8 @@ import { markedVariables,
 	setMarkedVariablePage,
 	setMarkedVariable,
 	getMarkedVariable }  from 'marked-variables';
+import { addTokenPositions } from 'marked-token-position';
+import MarkedLineNumbers from 'marked-line-numbers';
 import { markedSmartypantsLite as MarkedSmartypantsLite }                                from 'marked-smartypants-lite';
 import { gfmHeadingId as MarkedGFMHeadingId, resetHeadings as MarkedGFMResetHeadingIDs } from 'marked-gfm-heading-id';
 import { markedEmoji as MarkedEmojis }                                                   from 'marked-emoji';
@@ -359,6 +361,7 @@ Marked.use(mustacheInjectBlock);
 Marked.use(MarkedAlignedParagraphs());
 Marked.use(MarkedSubSuperText());
 Marked.use(MarkedNonbreakingSpaces());
+Marked.use(MarkedLineNumbers());
 Marked.use({ renderer: renderer, tokenizer: tokenizer, mangle: false });
 Marked.use(MarkedExtendedTables({ interruptPatterns: tableTerminators }), MarkedGFMHeadingId({ globalSlugs: true }),
 	MarkedSmartypantsLite(), MarkedEmojis(MarkedEmojiOptions));
@@ -497,6 +500,7 @@ const hbfm = {
 
 		rawBrewText = opts.hooks.preprocess(rawBrewText);
 		const tokens = Marked.lexer(rawBrewText, opts);
+    addTokenPositions(tokens);
 
 		Marked.walkTokens(tokens, opts.walkTokens);
 
