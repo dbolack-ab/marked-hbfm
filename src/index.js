@@ -361,10 +361,10 @@ Marked.use(mustacheInjectBlock);
 Marked.use(MarkedAlignedParagraphs());
 Marked.use(MarkedSubSuperText());
 Marked.use(MarkedNonbreakingSpaces());
-Marked.use(MarkedLineNumbers());
 Marked.use({ renderer: renderer, tokenizer: tokenizer, mangle: false });
 Marked.use(MarkedExtendedTables({ interruptPatterns: tableTerminators }), MarkedGFMHeadingId({ globalSlugs: true }),
 	MarkedSmartypantsLite(), MarkedEmojis(MarkedEmojiOptions));
+Marked.use(MarkedLineNumbers());
 
 function cleanUrl(href) {
 	try {
@@ -500,7 +500,8 @@ const hbfm = {
 
 		rawBrewText = opts.hooks.preprocess(rawBrewText);
 		const tokens = Marked.lexer(rawBrewText, opts);
-    addTokenPositions(tokens);
+
+		addTokenPositions(tokens);
 
 		Marked.walkTokens(tokens, opts.walkTokens);
 
