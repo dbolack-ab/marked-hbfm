@@ -11,7 +11,7 @@ updates:
     open-pull-requests-limit: 99
     groups:
       eslint-bundle:
-        patterns: [""*eslint*"]
+        patterns: ["*eslint*"]
         update-types: ["patch", "minor", "major"]
       minor-dependency-updates:
         patterns: ["*"]
