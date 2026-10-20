@@ -352,6 +352,22 @@ const tableTerminators = [
 ];
 
 const markdeepOptions = { langs: ['asciiArt'] };
+const markedLIneNumberOptions = [
+	'paragraph',
+	'image',
+	'blockquote',
+	'code',
+	'codespan',
+	'heading',
+	'list',
+	'mustacheSpans',
+	'mustacheDivs',
+	'mustacheInjectBlock',
+	'definitionListsSingleLine',
+	'definitionListsMultiLine',
+	'alignedParagraphs',
+	'hardBreaks'
+];
 
 Marked.use(markedVariables());
 Marked.use(MarkedDiagramsMarkdeep(markdeepOptions));
@@ -364,7 +380,7 @@ Marked.use(MarkedNonbreakingSpaces());
 Marked.use({ renderer: renderer, tokenizer: tokenizer, mangle: false });
 Marked.use(MarkedExtendedTables({ interruptPatterns: tableTerminators }), MarkedGFMHeadingId({ globalSlugs: true }),
 	MarkedSmartypantsLite(), MarkedEmojis(MarkedEmojiOptions));
-Marked.use(MarkedLineNumbers());
+Marked.use(MarkedLineNumbers(markedLIneNumberOptions));
 
 function cleanUrl(href) {
 	try {
